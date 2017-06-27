@@ -97,8 +97,8 @@ var url = "https://" + signedOptions.host + signedOptions.path;
 fetch(url, signedOptions)
   .then(body => body.json())
   .then(json => console.log(json));
-
-http.request(opts, function(res) { res.pipe(process.stdout) }).end()
+// The above code is equivalent to the following Node JS request:
+// http.request(opts, function(res) { res.pipe(process.stdout) }).end()
 /*
 <?xml version="1.0"?>
 <ListQueuesResponse xmlns="http://queue.amazonaws.com/doc/2012-11-05/">
