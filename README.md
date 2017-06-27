@@ -1,4 +1,6 @@
-**NOTE**: This package is a fork of https://github.com/mhart/aws4, modified to work with React Native apps. The original package `aws4` uses the core Node JS modules `crypto` and `querystring` which are not accessible from a React Native app. To solve this issue, `querystring` has been replaced by `querystring-browser`, and `crypto` has been replaced by a standalone javascript file [`crypto.js`](./crypto.js) generated using [browserify](http://browserify.org/), which provides polyfills for core Node JS modules. There are no code changes.
+**NOTE**: This package is a fork of https://github.com/mhart/aws4, modified to work with React Native apps. The original package [`aws4`](https://www.npmjs.com/package/aws4) uses the core Node JS modules `crypto` and `querystring` which are not accessible from React Native. To solve this issue, `querystring` has been replaced by [`querystring-browser`](https://www.npmjs.com/package/querystring-browser), and `crypto` has been replaced by a standalone javascript file [`crypto.js`](./crypto.js) generated using [browserify](http://browserify.org/), which provides polyfills for core Node JS modules. There are no code changes.
+
+Following is the unmodified README from [`aws4`](https://www.npmjs.com/package/aws4):
 
 aws4
 ----
