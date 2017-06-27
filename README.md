@@ -1,16 +1,12 @@
 **NOTE**: This package is a fork of https://github.com/mhart/aws4, modified to work with React Native apps. The original package [`aws4`](https://www.npmjs.com/package/aws4) uses the core Node JS modules `crypto` and `querystring` which are not accessible from React Native. To solve this issue, `querystring` has been replaced by [`querystring-browser`](https://www.npmjs.com/package/querystring-browser), and `crypto` has been replaced by a standalone javascript file [`crypto.js`](./crypto.js) generated using [browserify](http://browserify.org/), which provides polyfills for core Node JS modules. There are no code changes.
 
-Following is the unmodified README from [`aws4`](https://www.npmjs.com/package/aws4):
+Following is the a slighly modified README from [`aws4`](https://www.npmjs.com/package/aws4):
 
-aws4
-----
+aws4-react-native
+-----------------
 
-[![Build Status](https://secure.travis-ci.org/mhart/aws4.png?branch=master)](http://travis-ci.org/mhart/aws4)
-
-A small utility to sign vanilla node.js http(s) request options using Amazon's
+A small utility to sign React Native HTTP(S) requests using Amazon's
 [AWS Signature Version 4](http://docs.amazonwebservices.com/general/latest/gr/signature-version-4.html).
-
-Can also be used [in the browser](./browser).
 
 This signature is supported by nearly all Amazon services, including
 [S3](http://docs.aws.amazon.com/AmazonS3/latest/API/),
@@ -68,9 +64,7 @@ Example
 -------
 
 ```javascript
-var http  = require('http'),
-    https = require('https'),
-    aws4  = require('aws4')
+var aws4  = require('aws4-react-native')
 
 // given an options object you could pass to http.request
 var opts = {host: 'sqs.us-east-1.amazonaws.com', path: '/?Action=ListQueues'}
@@ -96,7 +90,12 @@ console.log(opts)
 }
 */
 
-// we can now use this to query AWS using the standard node.js http API
+// we can now use this to query AWS using the standard React Native API
+var url = "https://" + signedOptions.host + signedOptions.path;
+fetch(url, signedOptions)
+  .then(body => body.json())
+  .then(json => console.log(json));
+
 http.request(opts, function(res) { res.pipe(process.stdout) }).end()
 /*
 <?xml version="1.0"?>
@@ -115,8 +114,13 @@ aws4.sign(opts, {accessKeyId: '', secretAccessKey: ''})
 // can also add the signature to query strings
 aws4.sign({service: 's3', path: '/my-bucket?X-Amz-Expires=12345', signQuery: true})
 
-// create a utility function to pipe to stdout (with https this time)
-function request(o) { https.request(o, function(res) { res.pipe(process.stdout) }).end(o.body || '') }
+// create a utility function to print the output to console
+function request(signedOptions) { 
+  var url = "https://" + (signedOptions.host || signedOptions.hostname) + signedOptions.path;
+  fetch(url, signedOptions)
+    .then(body => body.json())
+    .then(json => console.log(json));
+}
 
 // aws4 can infer the HTTP method if a body is passed in
 // method will be POST and Content-Type: 'application/x-www-form-urlencoded; charset=utf-8'
@@ -509,10 +513,8 @@ Installation
 With [npm](http://npmjs.org/) do:
 
 ```
-npm install aws4
+npm install aws4-react-native
 ```
-
-Can also be used [in the browser](./browser).
 
 Thanks
 ------
