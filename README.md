@@ -1,7 +1,11 @@
 aws4-react-native
 -----------------
 
-**NOTE**: This package is a fork of https://github.com/mhart/aws4, modified to work with React Native apps. The original package [`aws4`](https://www.npmjs.com/package/aws4) uses the core Node JS modules `crypto` and `querystring` which are not accessible from React Native. To solve this issue, `querystring` has been replaced by [`querystring-browser`](https://www.npmjs.com/package/querystring-browser), and `crypto` has been replaced by a standalone javascript file [`crypto.js`](./crypto.js) generated using [browserify](http://browserify.org/), which provides polyfills for core Node JS modules. There are no code changes. What follows is the a slighly modified README from [`aws4`](https://www.npmjs.com/package/aws4).
+**NOTE**: This package is a fork of https://github.com/mhart/aws4, modified to work with React Native apps. The core Node JS module `querystring` has been replaced by [`querystring-browser`](https://www.npmjs.com/package/querystring-browser), and `crypto` has been replaced by a standalone javascript file [`crypto.js`](./crypto.js) generated using [browserify](http://browserify.org/). There are no other code changes.
+
+What follows is the a slighly modified README from [`aws4`](https://www.npmjs.com/package/aws4).
+
+<hr/>
 
 A small utility to sign React Native HTTP(S) requests using Amazon's
 [AWS Signature Version 4](http://docs.amazonwebservices.com/general/latest/gr/signature-version-4.html).
