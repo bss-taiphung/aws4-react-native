@@ -74,6 +74,7 @@
   },
   "dependencies": {
     "buffer": "^5.0.8",
+    "cipher-base": "^1.0.4",
     "querystring-browser": "^1.0.4"
   }
 }
